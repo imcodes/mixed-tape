@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ApiSongController extends AbstractController
 {
-    #[Route('api/songs/{id<\d+>}')]
+    #[Route('api/songs/{id<\d+>}',  name: 'api_get_song')]
 	public function getSong(int $id, LoggerInterface $logger): Response
     {
        //TODO: Query the database for the song data

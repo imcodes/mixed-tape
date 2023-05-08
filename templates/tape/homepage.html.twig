@@ -36,10 +36,13 @@
             <h2 class="mb-4">10 songs (30 minutes of 60 still available)</h2>
         {% for song in songs %}
        
-            <div class="song-list">
+            <div class="song-list" {{stimulus_controller('song-controls', {
+                infoUrl: path('api_get_song', { id: loop.index }),
+                isPlaying: false
+            }) }}>
                 <div class="d-flex mb-3">
-                    <a href="#">
-                        <i class="fas fa-play me-3"></i>
+                    <a href="#" {{stimulus_action('song-controls','togglePlayPause')}}>
+                        <i class="fas fa-play me-3" {{stimulus_target('song-controls','playPauseIcon')}}></i>
                     </a>
                     <span class="song-details">{{ song . track }} by {{ (song . artist) | upper }}</span>
                     <a href="#">
