@@ -24,10 +24,7 @@ export default class extends Controller {
 
     togglePlayPause(event){
         event.preventDefault()
-        
-        
         this.isPlayingValue ? this.pause() : this.play()
-
     }
 
     play() {
@@ -41,27 +38,30 @@ export default class extends Controller {
         }
         // Change the play icon if song ended
         this.audio.addEventListener('ended',()=>{
-            this.isPlayingValue = false
+            // this.isPlayingValue = false
             this.changeIcon()
         })
+
         this.audio.play()
-        this.isPlayingValue = true
+        // this.isPlayingValue = true
         this.changeIcon()
         console.log('playing')
     }
 
     pause() {
         this.audio.pause()
-        this.isPlayingValue = false
         this.changeIcon()
         console.log('paused')
     }
 
-    stop(event){
-        event.preventDefault()
+    stop(){
+        this.audio.stop()
+        $this.changeIcon()
     }
 
     changeIcon(){
+        this.isPlayingValue = this.isPlayingValue ? false : true
+
         if(this.isPlayingValue){
             this.playPauseIconTarget.classList.remove('fa-play')
             this.playPauseIconTarget.classList.add('fa-pause')
