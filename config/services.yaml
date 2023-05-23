@@ -22,3 +22,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\MixRepoService:
+        bind:
+            '$isDebug': '%kernel.debug%' #this is a container parameter that returns true on Dev environment and false on prod environement

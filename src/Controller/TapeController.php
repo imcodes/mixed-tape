@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Service\MixRepoService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class TapeController extends AbstractController
 {
@@ -28,14 +30,19 @@ class TapeController extends AbstractController
     }
 
     #[Route( '/browse/{slug}', name: 'app_browse' )]
-    public function browse($slug = null): Response
+    //autowire our custom service
+    public function browse( MixRepoService $mixRepo, $slug = null): Response
     {
         $title = ucwords(str_replace('-',' ',$slug));
+        $mixes = $mixRepo->getAll();
         $genre = $slug ? $title : null;
+        
         return $this->render('tape/browse.html.twig',[
             'genre' => $genre,
+            'mixes' => $mixes,
         ]);
     }
 
+    
 
 }
